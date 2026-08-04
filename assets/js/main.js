@@ -5,6 +5,14 @@
   document.documentElement.classList.add('js');
   requestAnimationFrame(() => document.body.classList.add('is-ready'));
 
+  /* ---------- remember language choice ---------- */
+  document.addEventListener('click', (e) => {
+    const langLink = e.target.closest('[data-set-lang]');
+    if (langLink) {
+      try { localStorage.setItem('aperio-lang', langLink.getAttribute('data-set-lang')); } catch (err) {}
+    }
+  });
+
   /* ---------- nav shrink on scroll ---------- */
   const nav = document.getElementById('nav');
   if (nav) {

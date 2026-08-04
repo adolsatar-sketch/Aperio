@@ -54,7 +54,7 @@ img.mark{ display:block; }
 
 /* ---------- SKIP LINK ---------- */
 .skip-link{
-  position:fixed; top:-60px; left:16px; z-index:1000;
+  position:fixed; top:-60px; inset-inline-start:16px; z-index:1000;
   background:var(--clay); color:var(--paper);
   padding:12px 20px; font-size:13px; letter-spacing:0.06em;
   border-radius:2px; transition:top .3s var(--ease);
@@ -81,13 +81,21 @@ nav.scrolled{ padding:16px 48px; background:rgba(20,18,15,0.92); border-bottom:1
 .navlinks a{ opacity:0.72; transition:opacity .3s var(--ease); position:relative; color:var(--paper); }
 .navlinks a:hover, .navlinks a:focus-visible{ opacity:1; }
 .navlinks a::after{
-  content:''; position:absolute; left:0; bottom:-6px; width:0; height:1px; background:var(--clay);
+  content:''; position:absolute; inset-inline-start:0; bottom:-6px; width:0; height:1px; background:var(--clay);
   transition:width .3s var(--ease);
 }
 .navlinks a:hover::after, .navlinks a.active::after{ width:100%; }
 .navlinks a.active{ opacity:1; }
-.nav-cta{ display:flex; align-items:center; gap:32px; }
+.nav-cta{ display:flex; align-items:center; gap:20px; }
 @media (max-width:900px){ .navlinks{ display:none; } .nav-cta .btn-ghost{ display:none; } }
+
+.lang-switch{
+  font-size:12px; letter-spacing:0.04em; opacity:.65;
+  border:1px solid var(--line-dark); padding:6px 13px; border-radius:2px;
+  transition:opacity .3s var(--ease), border-color .3s var(--ease);
+  color:var(--paper);
+}
+.lang-switch:hover, .lang-switch:focus-visible{ opacity:1; border-color:var(--clay); }
 
 /* mobile menu toggle */
 .menu-toggle{
@@ -277,7 +285,7 @@ section{ padding:150px 0; position:relative; }
 }
 .traits .trait:last-child{ border-bottom:1px solid var(--line-light); }
 .trait span.desc{
-  font-family:'Work Sans', sans-serif; font-size:13.5px; font-weight:300; opacity:.6; text-align:right; max-width:52%;
+  font-family:'Work Sans', sans-serif; font-size:13.5px; font-weight:300; opacity:.6; text-align:end; max-width:52%;
 }
 
 /* positioning / promise blocks (about page) */
@@ -330,7 +338,7 @@ section{ padding:150px 0; position:relative; }
   transition:padding .35s var(--ease);
 }
 .work-list .work-row:last-child{ border-bottom:1px solid var(--line-dark); }
-.work-row:hover{ padding-left:14px; }
+.work-row:hover{ padding-inline-start:14px; }
 .work-main{ display:flex; align-items:baseline; gap:20px; flex-wrap:wrap; }
 .work-row h3{ font-family:'Space Grotesk', sans-serif; font-weight:400; font-size:22px; transition:color .3s var(--ease); }
 .work-row:hover h3{ color:var(--clay); }
@@ -429,3 +437,51 @@ footer{
 a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible{
   outline:2px solid var(--clay); outline-offset:3px;
 }
+
+/* ---------- ARABIC / RTL ----------
+   Arabic script does not support letter-spacing tracking (it breaks the
+   cursive joins between letters), so it is reset to normal wherever a
+   lang="ar" scope applies. Layout mirroring for flex/grid is handled
+   natively by the browser via [dir="rtl"] on <html> — see the logical
+   (inset-inline-*, padding-inline-*, text-align:end) properties used
+   above instead of left/right throughout this file. */
+:lang(ar){ letter-spacing:normal; }
+:lang(ar) body{ font-family:'Tajawal', sans-serif; }
+:lang(ar) .disp{ font-family:'Cairo', sans-serif; }
+:lang(ar) .mono{ font-family:'Tajawal', sans-serif; letter-spacing:normal; }
+/* ---------- LANGUAGE GATE ---------- */
+.gate-screen{
+  min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  background:
+    radial-gradient(60% 50% at 50% 20%, rgba(193,89,47,0.07), transparent 60%),
+    var(--night);
+  text-align:center; padding:64px 24px; gap:56px;
+}
+.gate-mark{ width:84px; height:auto; opacity:.94; }
+.gate-choices{ display:flex; gap:20px; flex-wrap:wrap; justify-content:center; }
+.gate-btn{
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  min-width:220px; padding:26px 40px; border:1px solid var(--line-dark); border-radius:2px;
+  transition:border-color .35s var(--ease), background .35s var(--ease), color .35s var(--ease);
+  color:var(--paper);
+}
+.gate-btn:hover, .gate-btn:focus-visible{ border-color:var(--clay); background:var(--clay-soft); }
+.gate-btn-label{ font-family:'Space Grotesk', sans-serif; font-size:21px; font-weight:300; }
+.gate-btn-label[lang="ar"]{ font-family:'Cairo', sans-serif; }
+.gate-btn-sub{ font-family:'JetBrains Mono', monospace; font-size:10.5px; letter-spacing:0.14em; opacity:.5; }
+.gate-foot{ font-size:11px; letter-spacing:0.12em; opacity:.4; font-family:'JetBrains Mono', monospace; }
+
+:lang(ar) h1.headline,
+:lang(ar) .page-hero h1,
+:lang(ar) .section-head h2,
+:lang(ar) .pull-quote blockquote,
+:lang(ar) .promise-band p,
+:lang(ar) .contact h2,
+:lang(ar) .trait,
+:lang(ar) .cap-row h3,
+:lang(ar) .work-row h3,
+:lang(ar) .case-card h3,
+:lang(ar) .proc-cell h4,
+:lang(ar) .brand span,
+:lang(ar) .foot-brand span,
+:lang(ar) .mobile-menu-links a{ font-family:'Cairo', sans-serif; }
