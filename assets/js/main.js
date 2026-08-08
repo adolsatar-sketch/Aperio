@@ -62,30 +62,13 @@
     Array.from(group.children).forEach((child, i) => child.style.setProperty('--stagger-i', i));
   });
 
-  /* ---------- hero mark entrance + cursor-follow focus dot ---------- */
+  /* ---------- hero mark entrance ---------- */
+  /* the focus-dot's continuous left-right sway is a pure CSS animation
+     (see .focus-dot / @keyframes dot-sway) so it runs on every device,
+     not just on mouse hover — no JS needed for the motion itself. */
   const stage = document.getElementById('markStage');
-  const dot = document.getElementById('focusDot');
   if (stage) {
     requestAnimationFrame(() => stage.classList.add('in'));
-  }
-  if (stage && dot && !reduced && window.matchMedia('(pointer: fine)').matches) {
-    let raf = null;
-    stage.addEventListener('mousemove', (e) => {
-      const r = stage.getBoundingClientRect();
-      const cx = r.width / 2, cy = r.height / 2;
-      const dx = (e.clientX - r.left - cx) / cx;
-      const dy = (e.clientY - r.top - cy) / cy;
-      const range = 3.2;
-      if (raf) cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        dot.style.left = (59.5 + dx * range) + '%';
-        dot.style.top = (50 + dy * range) + '%';
-      });
-    });
-    stage.addEventListener('mouseleave', () => {
-      dot.style.left = '59.5%';
-      dot.style.top = '50%';
-    });
   }
 
   /* ---------- portfolio filter ---------- */

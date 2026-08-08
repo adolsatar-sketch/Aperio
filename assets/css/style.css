@@ -187,10 +187,15 @@ body.menu-open .mobile-menu-links a{ opacity:1; transform:translateY(0); }
   background:var(--clay);
   left:59.5%; top:50%;
   transform:translate(-50%,-50%) scale(0);
-  transition:left .6s var(--ease), top .6s var(--ease), transform .5s var(--ease);
+  transition:transform .5s var(--ease);
   box-shadow:0 0 24px 2px rgba(193,89,47,0.55);
+  animation:dot-sway 4.2s ease-in-out infinite;
 }
 .hero-mark-stage.in .focus-dot{ transform:translate(-50%,-50%) scale(1); transition-delay:.9s; }
+@keyframes dot-sway{
+  0%, 100%{ left:56.5%; }
+  50%{ left:62.5%; }
+}
 .ring{
   position:absolute; inset:0; border:1px solid var(--line-dark); border-radius:50%;
   animation:spin 60s linear infinite;
