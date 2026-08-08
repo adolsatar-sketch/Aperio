@@ -10,15 +10,23 @@ step or dependencies.
 
 ```
 index.html          Language gate — remembers your choice, else lets you pick EN/AR
-en/                  English site (index, about, services, portfolio, contact)
-ar/                  Arabic site — same 5 pages, RTL, translated content
+en/                  English site (index, about, services, portfolio)
+ar/                  Arabic site — same pages, RTL, translated content
 assets/
   css/style.css      Design system + all page styles, incl. RTL/Arabic type rules
   js/main.js         Nav, mobile menu, scroll reveals, page transitions,
                      portfolio filter, language-choice persistence
-  images/            Logo mark (paper/obsidian/clay) and favicons
+  images/            Logo mark (paper/obsidian/clay), favicons, and
+                     work/ (real screenshots of the 4 portfolio projects)
   manifest.json      Web app manifest
 ```
+
+## Contact
+
+There's no separate contact page — every "Start a project" / "Contact"
+link across the site opens WhatsApp directly (wa.me, with a pre-filled
+greeting), in the visitor's language. The footer links to Instagram,
+LinkedIn, and the same WhatsApp number.
 
 ## Language handling
 
